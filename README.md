@@ -1,16 +1,4 @@
-# testPlugin117
-
-foo23
-
-[![Version](https://img.shields.io/npm/v/testPlugin117.svg)](https://npmjs.org/package/testPlugin117)
-[![CircleCI](https://circleci.com/gh/vmundra/testPlugin117/tree/master.svg?style=shield)](https://circleci.com/gh/vmundra/testPlugin117/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/vmundra/testPlugin117?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/testPlugin117/branch/master)
-[![Greenkeeper](https://badges.greenkeeper.io/vmundra/testPlugin117.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/vmundra/testPlugin117/badge.svg)](https://snyk.io/test/github/vmundra/testPlugin117)
-[![Downloads/week](https://img.shields.io/npm/dw/testPlugin117.svg)](https://npmjs.org/package/testPlugin117)
-[![License](https://img.shields.io/npm/l/testPlugin117.svg)](https://github.com/vmundra/testPlugin117/blob/master/package.json)
-
-<!-- toc -->
+# test-plugin-release
 
 - [Debugging your plugin](#debugging-your-plugin)
   <!-- tocstop -->

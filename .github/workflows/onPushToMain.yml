@@ -9,9 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Conventional Changelog Action
         id: changelog
-        uses: TriPSs/conventional-changelog-action@9962c3267b32873dbc552a38a8397194361e1101
+        uses: TriPSs/conventional-changelog-action
         with:
           git-user-name: ${{ secrets.GH_USERNAME }}
           git-user-email: ${{ secrets.GH_EMAIL }}
@@ -20,7 +21,7 @@ jobs:
           release-count: '0'
           output-file: 'CHANGELOG.md'
       - name: Create Github Release
-        uses: ncipollo/release-action@6c75be85e571768fa31b40abf38de58ba0397db5
+        uses: ncipollo/release-action
         with:
           name: ${{ steps.changelog.outputs.tag }}
           tag: ${{ steps.changelog.outputs.tag }}

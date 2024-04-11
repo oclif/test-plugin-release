@@ -14,7 +14,7 @@ jobs:
         id: next-version
         uses: TriPSs/conventional-changelog-action@v5
         with:
-          tag-prefix: 'v'
+          tag-prefix: ''
           skip-version-file: true # Do not update the version in the package.json
           skip-commit: true # Do not commit the version bump
           git-push: false # Do not push to Github

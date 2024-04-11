@@ -21,7 +21,11 @@ jobs:
           release-count: '0'
           output-file: 'CHANGELOG.md'
       - name: Generate oclif readme
-        run: yarn && yarn oclif readme --version ${{ steps.changelog.outputs.tag }}
+        run: |
+          yarn
+          yarn oclif readme --version ${{ steps.changelog.outputs.tag }}
+          git add .
+          git commit -m "chore: update readme"
       - name: Create Github Release
         uses: ncipollo/release-action@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}

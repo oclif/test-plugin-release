@@ -1,8 +1,8 @@
 {
-  "name": "@salesforce/test-plugin117",
+  "name": "@oclif/test-plugin-release",
   "version": "4.0.0",
-  "author": "Vamsi-Mundra-Salesforce",
-  "bugs": "https://github.com/salesforcecli/testPackageRelease/issues",
+  "author": "Salesforce",
+  "bugs": "https://github.com/oclif/test-plugin-release/issues",
   "dependencies": {
     "@oclif/core": "^1",
     "@salesforce/command": "^5.2.6",
@@ -48,10 +48,8 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/salesforcecli/testPackageRelease",
-  "keywords": [
-    "sfdx-plugin"
-  ],
+  "homepage": "https://github.com/oclif/test-plugin-release",
+  "keywords": [],
   "license": "BSD-3-Clause",
   "oclif": {
     "commands": "./lib/commands",
@@ -67,7 +65,7 @@
       "@salesforce/plugin-command-reference"
     ]
   },
-  "repository": "salesforcecli/testPackageRelease",
+  "repository": "oclif/test-plugin-release",
   "scripts": {
     "build": "sf-build",
     "clean": "sf-clean",

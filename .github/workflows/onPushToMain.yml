@@ -10,6 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Get the next version for oclif readme
+        id: next-version
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          tag-prefix: 'v'
+          skip-version-file: true # Do not update the version in the package.json
+          skip-commit: true # Do not commit the version bump
+          git-push: false # Do not push to Github
+          skip-tag: true # Do not tag release
+          output-file: 'false' # No changelog file
+      - name: Generate oclif readme
+        run: |
+          yarn
+          yarn oclif readme --version ${{ steps.next-version.outputs.tag }}
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
@@ -20,12 +34,6 @@ jobs:
           # Setting 'release-count' to 0 will keep ALL releases in the change log file (no pruning)
           release-count: '0'
           output-file: 'CHANGELOG.md'
-      - name: Generate oclif readme
-        run: |
-          yarn
-          yarn oclif readme --version ${{ steps.changelog.outputs.tag }}
-          git add .
-          git commit -m "chore: update readme"
       - name: Create Github Release
         uses: ncipollo/release-action@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}

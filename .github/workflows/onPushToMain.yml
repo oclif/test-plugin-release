@@ -24,7 +24,7 @@ jobs:
         run: |
           yarn
           yarn oclif readme --version ${{ steps.next-version.outputs.tag }}
-      - name: Conventional Changelog Action
+      - name: Generate CHANGELOG.md
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
         with:

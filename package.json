@@ -1,6 +1,6 @@
 {
   "name": "@oclif/test-plugin-release",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "author": "Salesforce",
   "bugs": "https://github.com/oclif/test-plugin-release/issues",
   "dependencies": {

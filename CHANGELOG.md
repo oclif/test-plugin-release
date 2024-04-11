@@ -1,3 +1,12 @@
+## [4.0.2](https://github.com/oclif/test-plugin-release/compare/v4.0.1...v4.0.2) (2024-04-11)
+
+
+### Bug Fixes
+
+* update workflows ([ccdead6](https://github.com/oclif/test-plugin-release/commit/ccdead6495ad203d64212d6e3bbe8f4e21c3e06c))
+
+
+
 ## [4.0.1](https://github.com/oclif/test-plugin-release/compare/v4.0.0...v4.0.1) (2024-04-11)
 
 

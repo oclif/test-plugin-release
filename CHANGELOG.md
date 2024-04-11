@@ -1,3 +1,12 @@
+## [5.0.3](https://github.com/oclif/test-plugin-release/compare/v5.0.2...v5.0.3) (2024-04-11)
+
+
+### Bug Fixes
+
+* generate readme during release ([d08802d](https://github.com/oclif/test-plugin-release/commit/d08802d0522adea4cd0f4ccd086e8aba71860251))
+
+
+
 ## [5.0.2](https://github.com/oclif/test-plugin-release/compare/v5.0.1...v5.0.2) (2024-04-11)
 
 

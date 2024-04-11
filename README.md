@@ -1,87 +1,247 @@
-# test-plugin-release
+@oclif/test-plugin-release
+=================
 
-- [Debugging your plugin](#debugging-your-plugin)
-  <!-- tocstop -->
-  <!-- install -->
-  <!-- usage -->
+Plugin for testing GHA for oclif templates
 
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![GitHub license](https://img.shields.io/github/license/oclif/plugin-test-release)](https://github.com/oclif/plugin-test-release/blob/main/LICENSE)
+
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+# Usage
+<!-- usage -->
 ```sh-session
-$ npm install -g @salesforce/test-plugin117
-$ sfdx COMMAND
+$ npm install -g oclif-hello-world
+$ oex COMMAND
 running command...
-$ sfdx (--version)
-@salesforce/test-plugin117/1.5.3 darwin-x64 node-v16.13.2
-$ sfdx --help [COMMAND]
+$ oex (--version)
+oclif-hello-world/0.0.0 darwin-x64 node-v16.13.1
+$ oex --help [COMMAND]
 USAGE
-  $ sfdx COMMAND
+  $ oex COMMAND
 ...
 ```
-
 <!-- usagestop -->
+# Commands
 <!-- commands -->
+- [@oclif/test-plugin-release](#ocliftest-plugin-release)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`oex hello PERSON`](#oex-hello-person)
+  - [`oex hello world`](#oex-hello-world)
+  - [`oex help [COMMAND]`](#oex-help-command)
+  - [`oex plugins`](#oex-plugins)
+  - [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
+  - [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin)
+  - [`oex plugins:link PLUGIN`](#oex-pluginslink-plugin)
+  - [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin)
+  - [`oex plugins update`](#oex-plugins-update)
 
-- [`sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-helloorg--n-string--f--v-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+## `oex hello PERSON`
 
-## `sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
-
-print a greeting and your org IDs
+Say hello
 
 ```
 USAGE
-  $ sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ oex hello [PERSON] -f <value>
+
+ARGUMENTS
+  PERSON  Person to say hello to
 
 FLAGS
-  -f, --force                                                                       example boolean flag
-  -n, --name=<value>                                                                name to print
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  -v, --targetdevhubusername=<value>                                                username or alias for the dev hub
-                                                                                    org; overrides default dev hub org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -f, --from=<value>  (required) Who is saying hello
 
 DESCRIPTION
-  print a greeting and your org IDs
+  Say hello
 
 EXAMPLES
-  $ sfdx hello:org --targetusername myOrg@example.com --targetdevhubusername devhub@org.com
-
-  $ sfdx hello:org --name myname --targetusername myOrg@example.com
+  $ oex hello friend --from oclif
+  hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello/org.ts](https://github.com/vmundra/testPlugin117/blob/v1.5.3/src/commands/hello/org.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
 
+## `oex hello world`
+
+Say hello world
+
+```
+USAGE
+  $ oex hello world
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ oex hello world
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `oex help [COMMAND]`
+
+Display help for oex.
+
+```
+USAGE
+  $ oex help [COMMAND] [-n]
+
+ARGUMENTS
+  COMMAND  Command to show help for.
+
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for oex.
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+
+## `oex plugins`
+
+List installed plugins.
+
+```
+USAGE
+  $ oex plugins [--core]
+
+FLAGS
+  --core  Show core plugins.
+
+DESCRIPTION
+  List installed plugins.
+
+EXAMPLES
+  $ oex plugins
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+
+## `oex plugins:inspect PLUGIN...`
+
+Displays installation properties of a plugin.
+
+```
+USAGE
+  $ oex plugins:inspect PLUGIN...
+
+ARGUMENTS
+  PLUGIN  [default: .] Plugin to inspect.
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Displays installation properties of a plugin.
+
+EXAMPLES
+  $ oex plugins:inspect myplugin
+```
+
+## `oex plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ oex plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+ALIASES
+  $ oex plugins add
+
+EXAMPLES
+  $ oex plugins:install myplugin
+
+  $ oex plugins:install https://github.com/someuser/someplugin
+
+  $ oex plugins:install someuser/someplugin
+```
+
+## `oex plugins:link PLUGIN`
+
+Links a plugin into the CLI for development.
+
+```
+USAGE
+  $ oex plugins:link PLUGIN
+
+ARGUMENTS
+  PATH  [default: .] path to plugin
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Links a plugin into the CLI for development.
+
+  Installation of a linked plugin will override a user-installed or core plugin.
+
+  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
+  command will override the user-installed or core plugin implementation. This is useful for development work.
+
+EXAMPLES
+  $ oex plugins:link myplugin
+```
+
+## `oex plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ oex plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oex plugins unlink
+  $ oex plugins remove
+```
+
+## `oex plugins update`
+
+Update installed plugins.
+
+```
+USAGE
+  $ oex plugins update [-h] [-v]
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Update installed plugins.
+```
 <!-- commandsstop -->
-<!-- debugging-your-plugin -->
-
-# Debugging your plugin
-
-We recommend using the Visual Studio Code (VS Code) IDE for your plugin development. Included in the `.vscode` directory of this plugin is a `launch.json` config file, which allows you to attach a debugger to the node process when running your commands.
-
-To debug the `hello:org` command:
-
-1. Start the inspector
-
-If you linked your plugin to the sfdx cli, call your command with the `dev-suspend` switch:
-
-```sh-session
-$ sfdx hello:org -u myOrg@example.com --dev-suspend
-```
-
-Alternatively, to call your command using the `bin/run` script, set the `NODE_OPTIONS` environment variable to `--inspect-brk` when starting the debugger:
-
-```sh-session
-$ NODE_OPTIONS=--inspect-brk bin/run hello:org -u myOrg@example.com
-```
-
-2. Set some breakpoints in your command code
-3. Click on the Debug icon in the Activity Bar on the side of VS Code to open up the Debug view.
-4. In the upper left hand corner of VS Code, verify that the "Attach to Remote" launch configuration has been chosen.
-5. Hit the green play button to the left of the "Attach to Remote" launch configuration window. The debugger should now be suspended on the first line of the program.
-6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
-   <br><img src=".images/vscodeScreenshot.png" width="480" height="278"><br>
-   Congrats, you are debugging!

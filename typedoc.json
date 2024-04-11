@@ -1,6 +1,0 @@
-{
-  "theme": "default",
-  "excludePrivate": true,
-  "excludeProtected": true,
-  "entryPoints": "src"
-}

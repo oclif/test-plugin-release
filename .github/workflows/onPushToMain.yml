@@ -21,10 +21,12 @@ jobs:
           skip-tag: true # Do not tag release
           output-file: 'false' # No changelog file
       - name: Generate oclif readme
+        if: ${{ steps.next-version.outputs.skipped == 'false' }}
         run: |
           yarn
           yarn oclif readme --version ${{ steps.next-version.outputs.tag }}
       - name: Generate CHANGELOG.md
+        if: ${{ steps.next-version.outputs.skipped == 'false' }}
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
         with:

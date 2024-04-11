@@ -10,24 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-      - name: Conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action
-        with:
-          git-user-name: ${{ secrets.GH_USERNAME }}
-          git-user-email: ${{ secrets.GH_EMAIL }}
-          github-token: ${{ secrets.GH_TOKEN }}
-          # Setting 'release-count' to 0 will keep ALL releases in the change log file (no pruning)
-          release-count: '0'
-          output-file: 'CHANGELOG.md'
-      - name: Create Github Release
-        uses: ncipollo/release-action
-        with:
-          name: ${{ steps.changelog.outputs.tag }}
-          tag: ${{ steps.changelog.outputs.tag }}
-          commit: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
-          token: ${{ secrets.GH_TOKEN }}
-          skipIfReleaseExists: true
+      # - name: Conventional Changelog Action
+      #   id: changelog
+      #   uses: TriPSs/conventional-changelog-action
+      #   with:
+      #     git-user-name: ${{ secrets.GH_USERNAME }}
+      #     git-user-email: ${{ secrets.GH_EMAIL }}
+      #     github-token: ${{ secrets.GH_TOKEN }}
+      #     # Setting 'release-count' to 0 will keep ALL releases in the change log file (no pruning)
+      #     release-count: '0'
+      #     output-file: 'CHANGELOG.md'
+      # - name: Create Github Release
+      #   uses: ncipollo/release-action
+      #   with:
+      #     name: ${{ steps.changelog.outputs.tag }}
+      #     tag: ${{ steps.changelog.outputs.tag }}
+      #     commit: ${{ github.ref_name }}
+      #     body: ${{ steps.changelog.outputs.clean_changelog }}
+      #     token: ${{ secrets.GH_TOKEN }}
+      #     skipIfReleaseExists: true

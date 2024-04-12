@@ -10,39 +10,71 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Get the next version for oclif readme
-        id: next-version
-        uses: TriPSs/conventional-changelog-action@v5
-        with:
-          tag-prefix: ''
-          skip-version-file: true # Do not update the version in the package.json
-          skip-commit: true # Do not commit the version bump
-          git-push: false # Do not push to Github
-          skip-tag: true # Do not tag release
-          output-file: 'false' # No changelog file
-      - name: Generate oclif readme
-        if: ${{ steps.next-version.outputs.skipped == 'false' }}
+      - uses: actions/setup-node@v4
+      - name: Check if version already exists
+        id: version-check
         run: |
-          yarn
-          yarn oclif readme --version ${{ steps.next-version.outputs.tag }}
-      - name: Generate CHANGELOG.md
-        if: ${{ steps.next-version.outputs.skipped == 'false' }}
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v5
-        with:
-          git-user-name: ${{ secrets.GH_USERNAME }}
-          git-user-email: ${{ secrets.GH_EMAIL }}
-          github-token: ${{ secrets.GH_TOKEN }}
-          # Setting 'release-count' to 0 will keep ALL releases in the change log file (no pruning)
-          release-count: '0'
-          output-file: 'CHANGELOG.md'
+          package_version=$(node -p "require('./package.json').version")
+          if git rev-parse v$package_version >/dev/null 2>&1
+          then
+            echo "Version v$package_version already exists"
+            ::warning file=package.json,line=1::Version v$package_version already exists
+            echo "skipped=true" >> $GITHUB_OUTPUT
+          else
+            echo "Version v$package_version does not exist"
+            echo "skipped=false" >> $GITHUB_OUTPUT
+            echo "tag=v$package_version" >> $GITHUB_OUTPUT
+          fi
+      - name: Generate oclif README
+        if: ${{ steps.version-check.outputs.skipped == 'false' }}
+        id: oclif-readme
+        run: |
+          yarn version
+          git commit -am "chore: update README.md"
+          git push
       - name: Create Github Release
         uses: ncipollo/release-action@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        if: ${{ steps.version-check.outputs.skipped == 'false' }}
         with:
-          name: ${{ steps.changelog.outputs.tag }}
-          tag: ${{ steps.changelog.outputs.tag }}
+          name: ${{ steps.version-check.outputs.tag }}
+          tag: ${{ steps.version-check.outputs.tag }}
           commit: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
           token: ${{ secrets.GH_TOKEN }}
           skipIfReleaseExists: true
+
+      # - name: Get the next version for oclif readme
+      #   id: next-version
+      #   uses: TriPSs/conventional-changelog-action@v5
+      #   with:
+      #     tag-prefix: ''
+      #     skip-version-file: true # Do not update the version in the package.json
+      #     skip-commit: true # Do not commit the version bump
+      #     git-push: false # Do not push to Github
+      #     skip-tag: true # Do not tag release
+      #     output-file: 'false' # No changelog file
+      # - name: Generate oclif readme
+      #   if: ${{ steps.next-version.outputs.skipped == 'false' }}
+      #   run: |
+      #     yarn
+      #     yarn oclif readme --version ${{ steps.next-version.outputs.tag }}
+      # - name: Generate CHANGELOG.md
+      #   if: ${{ steps.next-version.outputs.skipped == 'false' }}
+      #   id: changelog
+      #   uses: TriPSs/conventional-changelog-action@v5
+      #   with:
+      #     git-user-name: ${{ secrets.GH_USERNAME }}
+      #     git-user-email: ${{ secrets.GH_EMAIL }}
+      #     github-token: ${{ secrets.GH_TOKEN }}
+      #     # Setting 'release-count' to 0 will keep ALL releases in the change log file (no pruning)
+      #     release-count: '0'
+      #     output-file: 'CHANGELOG.md'
+      # - name: Create Github Release
+      #   uses: ncipollo/release-action@v1
+      #   if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      #   with:
+      #     name: ${{ steps.changelog.outputs.tag }}
+      #     tag: ${{ steps.changelog.outputs.tag }}
+      #     commit: ${{ github.ref_name }}
+      #     body: ${{ steps.changelog.outputs.clean_changelog }}
+      #     token: ${{ secrets.GH_TOKEN }}
+      #     skipIfReleaseExists: true

@@ -15,7 +15,10 @@ jobs:
         id: version-check
         run: |
           package_version=$(node -p "require('./package.json').version")
-          if git rev-parse v$package_version >/dev/null 2>&1
+          # gh api repos/oclif/test-plugin-release/releases/tags/v5.0.5 >/dev/null 2>&1 && echo "Tag exists" || echo "Tag does not exist"
+          exists=$(gh api respos/${{ github.repository }}/releases/tags/v$package_version >/dev/null 2>&1 && echo "true" || echo "")
+
+          if [ -n "$exists" ];
           then
             echo "Version v$package_version already exists"
             ::warning file=package.json,line=1::Version v$package_version already exists
@@ -25,6 +28,11 @@ jobs:
             echo "skipped=false" >> $GITHUB_OUTPUT
             echo "tag=v$package_version" >> $GITHUB_OUTPUT
           fi
+      - name: Setup git
+        if: ${{ steps.version-check.outputs.skipped == 'false' }}
+        run: |
+          git config --global user.email ${{ secrets.GH_EMAIL }}
+          git config --global user.name ${{ secrets.GH_USERNAME }}
       - name: Generate oclif README
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         id: oclif-readme

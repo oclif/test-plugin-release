@@ -15,15 +15,12 @@ jobs:
         id: version-check
         run: |
           package_version=$(node -p "require('./package.json').version")
-          # gh api repos/oclif/test-plugin-release/releases/tags/v5.0.5 >/dev/null 2>&1 && echo "Tag exists" || echo "Tag does not exist"
-          echo "gh api repos/${{ github.repository }}/releases/tags/v$package_version"
-          gh api repos/${{ github.repository }}/releases/tags/v$package_version
           exists=$(gh api repos/${{ github.repository }}/releases/tags/v$package_version >/dev/null 2>&1 && echo "true" || echo "")
 
           if [ -n "$exists" ];
           then
             echo "Version v$package_version already exists"
-            echo "::warning file=package.json,line=1::Version v$package_version already exists"
+            echo "::warning file=package.json,line=1::Version v$package_version already exists - no release will be created. If you want to create a new release, please update the version in package.json and push again."
             echo "skipped=true" >> $GITHUB_OUTPUT
           else
             echo "Version v$package_version does not exist"

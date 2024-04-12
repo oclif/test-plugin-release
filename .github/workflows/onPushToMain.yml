@@ -23,7 +23,7 @@ jobs:
           if [ -n "$exists" ];
           then
             echo "Version v$package_version already exists"
-            ::warning file=package.json,line=1::Version v$package_version already exists
+            echo "::warning file=package.json,line=1::Version v$package_version already exists"
             echo "skipped=true" >> $GITHUB_OUTPUT
           else
             echo "Version v$package_version does not exist"

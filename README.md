@@ -17,7 +17,7 @@ $ npm install -g @oclif/test-plugin-release
 $ oex COMMAND
 running command...
 $ oex (--version)
-@oclif/test-plugin-release/v5.0.7 linux-x64 node-v18.20.1
+@oclif/test-plugin-release/5.0.8 linux-x64 node-v18.20.1
 $ oex --help [COMMAND]
 USAGE
   $ oex COMMAND
@@ -62,7 +62,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello/index.ts](https://github.com/oclif/test-plugin-release/blob/vv5.0.7/src/commands/hello/index.ts)_
+_See code: [src/commands/hello/index.ts](https://github.com/oclif/test-plugin-release/blob/v5.0.8/src/commands/hello/index.ts)_
 
 ## `oex hello world`
 
@@ -80,7 +80,7 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-_See code: [src/commands/hello/world.ts](https://github.com/oclif/test-plugin-release/blob/vv5.0.7/src/commands/hello/world.ts)_
+_See code: [src/commands/hello/world.ts](https://github.com/oclif/test-plugin-release/blob/v5.0.8/src/commands/hello/world.ts)_
 
 ## `oex help [COMMAND]`
 

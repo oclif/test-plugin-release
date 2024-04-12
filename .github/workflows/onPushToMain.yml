@@ -16,6 +16,8 @@ jobs:
         run: |
           package_version=$(node -p "require('./package.json').version")
           # gh api repos/oclif/test-plugin-release/releases/tags/v5.0.5 >/dev/null 2>&1 && echo "Tag exists" || echo "Tag does not exist"
+          echo "gh api respos/${{ github.repository }}/releases/tags/v$package_version"
+          gh api respos/${{ github.repository }}/releases/tags/v$package_version
           exists=$(gh api respos/${{ github.repository }}/releases/tags/v$package_version >/dev/null 2>&1 && echo "true" || echo "")
 
           if [ -n "$exists" ];
@@ -38,8 +40,12 @@ jobs:
         id: oclif-readme
         run: |
           yarn version
-          git commit -am "chore: update README.md"
-          git push
+          # if changes push to git
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -am "chore: update README.md"
+            git push -u origin ${{ github.ref_name }}
+          fi
       - name: Create Github Release
         uses: ncipollo/release-action@v1
         if: ${{ steps.version-check.outputs.skipped == 'false' }}

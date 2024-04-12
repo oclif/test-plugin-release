@@ -16,9 +16,9 @@ jobs:
         run: |
           package_version=$(node -p "require('./package.json').version")
           # gh api repos/oclif/test-plugin-release/releases/tags/v5.0.5 >/dev/null 2>&1 && echo "Tag exists" || echo "Tag does not exist"
-          echo "gh api respos/${{ github.repository }}/releases/tags/v$package_version"
-          gh api respos/${{ github.repository }}/releases/tags/v$package_version
-          exists=$(gh api respos/${{ github.repository }}/releases/tags/v$package_version >/dev/null 2>&1 && echo "true" || echo "")
+          echo "gh api repos/${{ github.repository }}/releases/tags/v$package_version"
+          gh api repos/${{ github.repository }}/releases/tags/v$package_version
+          exists=$(gh api repos/${{ github.repository }}/releases/tags/v$package_version >/dev/null 2>&1 && echo "true" || echo "")
 
           if [ -n "$exists" ];
           then

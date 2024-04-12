@@ -30,6 +30,8 @@ jobs:
             echo "skipped=false" >> $GITHUB_OUTPUT
             echo "tag=v$package_version" >> $GITHUB_OUTPUT
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Setup git
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         run: |

@@ -38,7 +38,8 @@ jobs:
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         id: oclif-readme
         run: |
-          npx oclif reamde --version v${{ steps.version-check.outputs.tag }}
+          yarn
+          yarn oclif readme --version ${{ steps.version-check.outputs.tag }}
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -am "chore: update README.md"

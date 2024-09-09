@@ -17,7 +17,7 @@ $ npm install -g @oclif/test-plugin-release
 $ oex COMMAND
 running command...
 $ oex (--version)
-@oclif/test-plugin-release/5.0.8 linux-x64 node-v18.20.1
+@oclif/test-plugin-release/5.0.8 linux-x64 node-v18.20.4
 $ oex --help [COMMAND]
 USAGE
   $ oex COMMAND
